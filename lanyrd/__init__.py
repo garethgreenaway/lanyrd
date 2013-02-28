@@ -1,6 +1,8 @@
 import json
 import urllib2
 
+from datetime import date
+
 class Lanyrd(object):
   
   def __init__(self):
@@ -18,22 +20,22 @@ class Lanyrd(object):
       results = results + row['rows']
     return results
 
-  def event(self, slug, year):
+  def event(self, slug, year = date.today().year):
     return self._get("%s/%s/" % (year, slug))
 
-  def speakers(self, slug, year):
+  def speakers(self, slug, year = date.today().year):
     results = []
     for row in self._get("%s/%s/speakers/" % (year,slug))['sections']:
       results = results + row['rows']
     return results
 
-  def attendees(self, slug, year):
+  def attendees(self, slug, year = date.today().year):
     results = []
     for row in self._get("%s/%s/attendees/" % (year,slug))['sections']:
       results = results + row['rows']
     return results
     
-  def schedule(self, slug, year):
+  def schedule(self, slug, year = date.today().year):
     results = []
     for row in self._get("%s/%s/schedule/" % (year,slug))['sections']:
       results = results + row['rows']
